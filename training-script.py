@@ -7,8 +7,8 @@ role = get_execution_role()
 
 #output has been taken from "#running the processing job", this where it is defined
 output = {'OutputName': 'test_data',
- 'S3Output': {'S3Uri': 's3://sagemaker-us-east-1-256537223841/sagemaker-scikit-learn-2022-11-16-12-08-12-357/output/test_data',
-  'LocalPath': '/opt/ml/processing/test',
+ 'S3Output': {'S3Uri': 's3://sagemaker-us-east-1-256537223841/sagemaker-scikit-learn-2022-11-16-12-08-12-357/output/train_data',
+  'LocalPath': '/opt/ml/processing/train',
   'S3UploadMode': 'EndOfJob'},
  'AppManaged': False}
 
