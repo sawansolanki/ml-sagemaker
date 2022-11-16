@@ -24,6 +24,14 @@ def run_prepros():
         ],
         arguments=["--train-test-split-ratio", "0.2"],
     )
+    preprocessing_job_description = sklearn_processor.jobs[-1].describe()
+
+    output_config = preprocessing_job_description["ProcessingOutputConfig"]
+    for output in output_config["Outputs"]:
+        if output["OutputName"] == "train_data":
+            preprocessed_training_data = output["S3Output"]["S3Uri"]
+        if output["OutputName"] == "test_data":
+            preprocessed_test_data = output["S3Output"]["S3Uri"]
     
 if __name__ == "__main__":
     run_prepros()
