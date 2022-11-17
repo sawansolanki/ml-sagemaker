@@ -15,6 +15,7 @@ role = 'arn:aws:iam::256537223841:role/mlops-role-sa1'
 
 with open ('details.txt','r+') as file:
     output = file.read()
+    output=dict(output)
 
 preprocessed_training_data = output["S3Output"]["S3Uri"]
 preprocessed_test_data = output["S3Output"]["S3Uri"]
