@@ -14,7 +14,7 @@ role = 'arn:aws:iam::256537223841:role/mlops-role-sa1'
 #   'S3UploadMode': 'EndOfJob'},
 #  'AppManaged': False}
 
-with open ('/__w/ml-sagemaker/ml-sagemaker/details.txt','r') as file:
+with open ('details.txt','r') as file:
     output = file.read()
     output = output.replace("'" , "\"")
     output=json.loads(output)
