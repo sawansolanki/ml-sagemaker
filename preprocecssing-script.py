@@ -33,6 +33,11 @@ def run_prepros():
             preprocessed_training_data = output["S3Output"]["S3Uri"]
         if output["OutputName"] == "test_data":
             preprocessed_test_data = output["S3Output"]["S3Uri"]
+            
+    #adding additional code to get output block in training-script.py
+    
+    with open ('details.txt','w+') as file:
+    file.write(output)
     
 if __name__ == "__main__":
     run_prepros()
