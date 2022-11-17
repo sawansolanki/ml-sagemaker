@@ -14,7 +14,10 @@ role = 'arn:aws:iam::256537223841:role/mlops-role-sa1'
 #   'S3UploadMode': 'EndOfJob'},
 #  'AppManaged': False}
 
-with open ('details.txt','r') as file:
+# with open ('details.txt','r') as file:
+cwd = os.getcwd()
+
+with open (os.path.join(cwd , 'details.txt' )) as file:
     output = file.read()
     output = output.replace("'" , "\"")
     output=json.loads(output)
