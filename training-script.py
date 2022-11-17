@@ -2,6 +2,7 @@
 from sagemaker.sklearn.estimator import SKLearn
 import sagemaker
 from sagemaker import get_execution_role
+import json
 
 #role = get_execution_role()
 role = 'arn:aws:iam::256537223841:role/mlops-role-sa1'
@@ -15,7 +16,8 @@ role = 'arn:aws:iam::256537223841:role/mlops-role-sa1'
 
 with open ('details.txt','r+') as file:
     output = file.read()
-    output=dict(output)
+    output = output.replace("'" , "\"")
+    output=json.loads(output)
 
 preprocessed_training_data = output["S3Output"]["S3Uri"]
 preprocessed_test_data = output["S3Output"]["S3Uri"]
