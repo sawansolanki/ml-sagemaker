@@ -71,4 +71,4 @@ jobs:
         GITHUB_SHA: ${{ github.sha }}
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn argparse numpy fsspec s3fs tabulate
-        python training-script.py    
+        python training-script-demo.py    
