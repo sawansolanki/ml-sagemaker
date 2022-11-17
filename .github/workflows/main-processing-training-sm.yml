@@ -56,7 +56,6 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: artifact-proc-to-train
-        path: /__w/ml-sagemaker/ml-sagemaker
     - uses: actions/checkout@v2
     - name: Fire SageMaker
 #       id: sm_train
