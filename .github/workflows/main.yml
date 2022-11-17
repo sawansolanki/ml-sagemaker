@@ -2,7 +2,7 @@ name: Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ mai ]
 env:
   APPLICATION_NAME: startupapp
 
@@ -39,5 +39,5 @@ jobs:
         GITHUB_SHA: ${{ github.sha }}
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn fsspec s3fs tabulate
-        python training-script.py
+        python preprocecssing-script.py
          
