@@ -1,7 +1,7 @@
 name: Pipeline-complete
 
 on:
-  push:
+  workflow_dispatch:
     branches: [ main ]
 env:
   APPLICATION_NAME: startupapp
