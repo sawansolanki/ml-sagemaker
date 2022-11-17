@@ -3,8 +3,8 @@ name: Pipeline-complete
 on:
   push:
     branches: [ main ]
-env:
-  APPLICATION_NAME: startupapp
+# env:
+#   APPLICATION_NAME: startupapp
 
 jobs:
   login_AWS:
