@@ -2,7 +2,7 @@ name: Pipeline-complete
 #change the event
 on:
   push:
-    branches: [ main ]
+    branches: [ feature ]
 # env:
 #   APPLICATION_NAME: startupapp
 
@@ -38,8 +38,9 @@ jobs:
         IAM_ROLE_NAME: ${{ secrets.IAM_ROLE_NAME }}
         GITHUB_SHA: ${{ github.sha }}
       run: |
+        echo "details are important file" >> details.txt
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn argparse numpy fsspec s3fs tabulate
-        python preprocecssing-script.py
+        python preprocecssing-script-demo.py
     - name: upload details artifacts
       uses: actions/upload-artifact@v3
       with:
