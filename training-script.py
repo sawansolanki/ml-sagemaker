@@ -3,7 +3,8 @@ from sagemaker.sklearn.estimator import SKLearn
 import sagemaker
 from sagemaker import get_execution_role
 
-role = get_execution_role()
+#role = get_execution_role()
+role = 'arn:aws:iam::256537223841:role/mlops-role-sa1'
 
 #output has been taken from "#running the processing job", this where it is defined
 output = {'OutputName': 'test_data',
