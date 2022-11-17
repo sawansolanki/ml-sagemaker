@@ -37,7 +37,7 @@ def run_prepros():
     #adding additional code to get output block in training-script.py
     
     with open ('details.txt','w+') as file:
-    file.write(output)
+        file.write(output)
     
 if __name__ == "__main__":
     run_prepros()
