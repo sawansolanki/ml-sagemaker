@@ -3,6 +3,7 @@ from sagemaker.sklearn.estimator import SKLearn
 import sagemaker
 from sagemaker import get_execution_role
 import json
+import os
 
 #role = get_execution_role()
 role = 'arn:aws:iam::256537223841:role/mlops-role-sa1'
