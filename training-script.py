@@ -7,11 +7,14 @@ from sagemaker import get_execution_role
 role = 'arn:aws:iam::256537223841:role/mlops-role-sa1'
 
 #output has been taken from "#running the processing job", this where it is defined
-output = {'OutputName': 'test_data',
- 'S3Output': {'S3Uri': 's3://sagemaker-us-east-1-256537223841/sagemaker-scikit-learn-2022-11-16-12-08-12-357/output/train_data',
-  'LocalPath': '/opt/ml/processing/train',
-  'S3UploadMode': 'EndOfJob'},
- 'AppManaged': False}
+# output = {'OutputName': 'test_data',
+#  'S3Output': {'S3Uri': 's3://sagemaker-us-east-1-256537223841/sagemaker-scikit-learn-2022-11-16-12-08-12-357/output/train_data',
+#   'LocalPath': '/opt/ml/processing/train',
+#   'S3UploadMode': 'EndOfJob'},
+#  'AppManaged': False}
+
+with open ('details.txt','r+') as file:
+    output = file.read()
 
 preprocessed_training_data = output["S3Output"]["S3Uri"]
 preprocessed_test_data = output["S3Output"]["S3Uri"]
