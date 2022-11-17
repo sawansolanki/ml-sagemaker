@@ -40,9 +40,8 @@ jobs:
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn argparse numpy fsspec s3fs tabulate
         python preprocecssing-script.py
-        ##adding sa1 additional code
-        cat details.txt >>report.md
-    - uses: actions/upload-artifact@v3
+    - name: upload details artifacts
+      uses: actions/upload-artifact@v3
       with:
         name: artifact-proc-to-train
         path: details.txt
@@ -52,10 +51,7 @@ jobs:
     runs-on: [ubuntu-latest]
     container: docker://dvcorg/cml-py3:latest
     steps:
-#     - uses: actions/download-artifact@v3
-#       with:
-#         name: artifact-proc-to-train
-    - name: download report artifacts
+    - name: download details artifacts
       uses: actions/download-artifact@v3
       with:
         name: artifact-proc-to-train
