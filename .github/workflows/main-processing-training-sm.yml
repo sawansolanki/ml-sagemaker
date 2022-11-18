@@ -24,10 +24,12 @@ jobs:
     needs: [ login_AWS ]
     runs-on: [ubuntu-latest]
     container: docker://dvcorg/cml-py3:latest
+    outputs:
+      output1: ${{ steps.sm_process.outputs.outputt }}
     steps:
     - uses: actions/checkout@v2
     - name: Fire SageMaker
-#       id: sm_process
+      id: sm_process
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -41,8 +43,8 @@ jobs:
         echo "details are important file" >> details.txt
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn argparse numpy fsspec s3fs tabulate
         python preprocecssing-script-demo.py
-        echo "::set-output name=outputt::$(cat details.txt)"
-        cat details.txt
+        #echo "::set-output name=outputt::$(cat details.txt)"
+        #cat details.txt
     - name: upload details artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -53,16 +55,20 @@ jobs:
     needs: [submit_processing_job]
     runs-on: [ubuntu-latest]
     container: docker://dvcorg/cml-py3:latest
+    
     steps:
     - name: download details artifacts
       uses: actions/download-artifact@v3
       with:
         name: artifact-proc-to-train
-      # run:|
-      #   echo "::set-output name=outputt::$(cat details.txt)"
-    - uses: actions/checkout@v2
-    - name: Fire SageMaker
-#       id: sm_train
+    - name : output-step
+      id : outputstep
+#       run: echo "::set-output name=outputt::$(cat details.txt)"
+      run: echo "test=$(cat details.txt)" >> $GITHUB_OUTPUT
+
+    - uses : actions/checkout@v2
+    - name : Fire SageMaker
+#       id : sm_train
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -74,4 +80,5 @@ jobs:
         GITHUB_SHA: ${{ github.sha }}
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn argparse numpy fsspec s3fs tabulate
+        echo ${{needs.submit_processing_job.outputs.output1}} >> details.txt
         python training-script-demo.py 
