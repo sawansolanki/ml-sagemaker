@@ -41,6 +41,8 @@ jobs:
         echo "details are important file" >> details.txt
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn argparse numpy fsspec s3fs tabulate
         python preprocecssing-script-demo.py
+        echo "::set-output name=outputt::$(cat details.txt)"
+        cat details.txt
     - name: upload details artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -56,7 +58,9 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: artifact-proc-to-train
-#     - uses: actions/checkout@v2
+      # run:|
+      #   echo "::set-output name=outputt::$(cat details.txt)"
+    - uses: actions/checkout@v2
     - name: Fire SageMaker
 #       id: sm_train
       env:
@@ -70,4 +74,4 @@ jobs:
         GITHUB_SHA: ${{ github.sha }}
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn argparse numpy fsspec s3fs tabulate
-        python training-script-demo.py    
+        python training-script-demo.py 
