@@ -81,4 +81,5 @@ jobs:
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn argparse numpy fsspec s3fs tabulate
         echo ${{needs.outputstep.outputs.output1}} >> details.txt
+        cat details.txt
         python training-script-demo.py 
