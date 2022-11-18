@@ -24,8 +24,7 @@ jobs:
     needs: [ login_AWS ]
     runs-on: [ubuntu-latest]
     container: docker://dvcorg/cml-py3:latest
-    outputs:
-      output1: ${{ steps.sm_process.outputs.outputt }}
+    
     steps:
     - uses: actions/checkout@v2
     - name: Fire SageMaker
@@ -55,7 +54,8 @@ jobs:
     needs: [submit_processing_job]
     runs-on: [ubuntu-latest]
     container: docker://dvcorg/cml-py3:latest
-    
+    outputs:
+      output1: ${{ steps.outputstep.outputs.detail }}
     steps:
     - name: download details artifacts
       uses: actions/download-artifact@v3
@@ -63,7 +63,7 @@ jobs:
         name: artifact-proc-to-train
     - name : output-step
       id : outputstep
-#       run: echo "::set-output name=outputt::$(cat details.txt)"
+#       run: echo "::set-output name=detail::$(cat details.txt)"
       run: echo "test=$(cat details.txt)" >> $GITHUB_OUTPUT
 
     - uses : actions/checkout@v2
@@ -80,5 +80,5 @@ jobs:
         GITHUB_SHA: ${{ github.sha }}
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker sklearn argparse numpy fsspec s3fs tabulate
-        echo ${{needs.submit_processing_job.outputs.output1}} >> details.txt
+        echo ${{needs.outputstep.outputs.output1}} >> details.txt
         python training-script-demo.py 
