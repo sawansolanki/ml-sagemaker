@@ -64,7 +64,7 @@ jobs:
     - name : output-step
       id : outputstep
 #       run: echo "::set-output name=detail::$(cat details.txt)"
-      run: echo "test=$(cat details.txt)" >> $GITHUB_OUTPUT
+      run: echo "detail=$(cat details.txt)" >> $GITHUB_OUTPUT
 
     - uses : actions/checkout@v2
     - name : Fire SageMaker
